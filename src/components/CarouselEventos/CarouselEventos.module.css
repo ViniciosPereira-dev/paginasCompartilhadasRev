@@ -1,0 +1,124 @@
+.carouselContainer {
+  max-width: 900px;
+  margin: 1rem auto;
+  border-radius: 1rem;
+  overflow: hidden;
+
+}
+
+.carouselCard {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.carouselCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  transition: transform 0.7s ease;
+}
+
+.carouselCard img:hover {
+  transform: scale(1.1);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0,0,0,0.4), transparent);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  color: white;
+}
+
+.cardTitle {
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+  text-align: center;
+}
+
+.cardDate {
+  font-size: 0.875rem;
+  color: #d1d5db; /* gray-300 */
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.cardButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.carouselNavigation {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.carouselDot {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.activeDot {
+  width: 1rem;
+  background-color: white;
+}
+
+.btnContainer{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.btnAnimated {
+  position: relative;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 0.9rem 2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  background: transparent;
+  border-radius: 0.6rem;
+  z-index: 1;
+}
+
+.btnAnimated::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+  z-index: -1;
+  border-radius: 0.6rem;
+}
+
+.btnAnimated:hover::before {
+  transform: scaleX(1);
+}
+
+.btnAnimated:hover {
+  color: #000;
+}

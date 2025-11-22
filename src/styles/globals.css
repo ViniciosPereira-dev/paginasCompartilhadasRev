@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafb; 
+}
+
+/* Ajuste para todas as seções com âncora */
+#hero,
+#instituicoes,
+#eventos,
+#sobre,
+#faq {
+  scroll-margin-top: 100px; 
+}
+
