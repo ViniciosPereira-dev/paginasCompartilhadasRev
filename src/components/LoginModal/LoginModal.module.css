@@ -18,3 +18,15 @@
   font-size: 0.875rem; 
   font-weight: 500;
 }
+
+.customLink {
+  color: #3b82f6; /* azul do Tailwind */
+  text-decoration: underline; /* força o underline */
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.customLink:hover {
+  color: #2563eb; /* muda para azul mais escuro ao passar o mouse */
+}
+

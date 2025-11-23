@@ -157,13 +157,9 @@ export function LoginModal() {
                       className="mt-4 flex justify-center gap-2"
                     >
                       Não possui conta?
-                      <Link
-                        href="/cadastro"
-                        className="text-blue-500 hover:underline"
-                        onClick={() => setOpen(false)}
-                      >
-                        Cadastrar
-                      </Link>
+                    <Link href="/cadastro" className={styles.customLink}>
+                      Cadastrar
+                    </Link>
                     </Typography>
                   </CardFooter>
                 </Form>

@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import styles from "./LivrosPage.module.css";
 
 export default function LivrosPage() {
+  const [generos, setGeneros] = useState(["Todos"]);
   const [busca, setBusca] = useState("");
   const [filtroGenero, setFiltroGenero] = useState("Todos");
   const [livros, setLivros] = useState([]);
@@ -31,6 +32,20 @@ export default function LivrosPage() {
   useEffect(() => {
     buscarLivros();
   }, []);
+
+  useEffect(() => {
+
+  const obterGeneros = async () => {
+    const res = await fetch("/api/livros");
+    const data = await res.json();
+
+    const lista = ["Todos", ...new Set(data.map(l => l.genero))];
+    setGeneros(lista);
+  };
+
+  obterGeneros();
+}, []);
+
 
   const handleSearch = async () => {
     if (!inputBusca) return;
@@ -61,12 +76,18 @@ export default function LivrosPage() {
       {/* Busca e filtro */}
       <div className={styles.buscaFiltro}>
 
-        <select value={filtroGenero} onChange={(e) => handleFiltro(e.target.value)} className={styles.selectFiltro}>
-          <option>Todos</option>
-          <option>Fantasia</option>
-          <option>Romance</option>
-          <option>Terror</option>
-        </select>
+      <select
+        value={filtroGenero}
+        onChange={(e) => handleFiltro(e.target.value)}
+        className={styles.selectFiltro}
+      >
+        {generos.map((g) => (
+          <option key={g} value={g}>
+            {g}
+          </option>
+        ))}
+      </select>
+
 
         <div className={styles.inputGrupo}>
           <input
