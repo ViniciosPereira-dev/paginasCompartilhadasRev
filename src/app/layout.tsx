@@ -1,7 +1,15 @@
+"use client";
+
 import "../styles/globals.css";
 import Header from "../components/Header/Header";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+
+  // rotas que NÃO devem ter header
+  const hideHeader = pathname === "/cadastro";
+
   return (
     <html lang="pt-br">
       <head>
@@ -10,11 +18,11 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
+
       <body style={{ fontFamily: "'Poppins', sans-serif" }}>
-        <Header />
+        {!hideHeader && <Header />} {/* SO SOME NESSA ROTA */}
         {children}
       </body>
     </html>
   );
 }
-

@@ -1,0 +1,49 @@
+/* ----- LAYOUT PRINCIPAL ----- */
+.container {
+  display: flex;
+  height: 100vh; /* ocupa a tela inteira */
+}
+
+/* ----- IMAGEM ESQUERDA ----- */
+.imageSide {
+  width: 50%;
+  height: 100%;
+  background-image: url("/imagens/hero.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* ----- FORMULÁRIO DIREITA ----- */
+.formSide {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+/* wrapper do form */
+.formWrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* ----- CAMPOS (não quebrar com erro) ----- */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+
+  /* reserva espaço para o erro */
+  margin-bottom: 18px;
+  min-height: 70px;
+}
+
+/* mensagem de erro */
+.error {
+  font-size: 13px;
+  color: red;
+
+  /* impede quebra do layout */
+  min-height: 18px;
+}
