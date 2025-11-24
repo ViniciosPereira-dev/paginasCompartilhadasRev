@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { Typography } from "@material-tailwind/react";
 import { Loader2, Search, X, ChevronDown, ChevronUp } from "lucide-react";
@@ -34,18 +35,14 @@ export default function LivrosPage() {
   }, []);
 
   useEffect(() => {
-
-  const obterGeneros = async () => {
-    const res = await fetch("/api/livros");
-    const data = await res.json();
-
-    const lista = ["Todos", ...new Set(data.map(l => l.genero))];
-    setGeneros(lista);
-  };
-
-  obterGeneros();
-}, []);
-
+    const obterGeneros = async () => {
+      const res = await fetch("/api/livros");
+      const data = await res.json();
+      const lista = ["Todos", ...new Set(data.map((l) => l.genero))];
+      setGeneros(lista);
+    };
+    obterGeneros();
+  }, []);
 
   const handleSearch = async () => {
     if (!inputBusca) return;
@@ -75,19 +72,17 @@ export default function LivrosPage() {
 
       {/* Busca e filtro */}
       <div className={styles.buscaFiltro}>
-
-      <select
-        value={filtroGenero}
-        onChange={(e) => handleFiltro(e.target.value)}
-        className={styles.selectFiltro}
-      >
-        {generos.map((g) => (
-          <option key={g} value={g}>
-            {g}
-          </option>
-        ))}
-      </select>
-
+        <select
+          value={filtroGenero}
+          onChange={(e) => handleFiltro(e.target.value)}
+          className={styles.selectFiltro}
+        >
+          {generos.map((g) => (
+            <option key={g} value={g}>
+              {g}
+            </option>
+          ))}
+        </select>
 
         <div className={styles.inputGrupo}>
           <input
@@ -117,20 +112,29 @@ export default function LivrosPage() {
 
       {/* Lista de livros */}
       {loading ? (
-        <Typography className="text-center text-gray-500 mt-4">Carregando livros...</Typography>
+        <Typography className="text-center text-gray-500 mt-4">
+          Carregando livros...
+        </Typography>
       ) : (
         <div className={styles.gridLivros}>
           {livros.map((livro) => (
             <div
               key={livro.id}
               className={styles.cardLivro}
-              onClick={() => { setLivroSelecionado(livro); setVerMais(false); }}
+              onClick={() => {
+                setLivroSelecionado(livro);
+                setVerMais(false);
+              }}
             >
               <img src={livro.imagem || "/placeholder.png"} alt={livro.titulo} className={styles.imgLivro} />
               <div className={styles.infoLivro}>
                 <h3 className="font-semibold text-gray-800">{livro.titulo}</h3>
                 <p className="text-sm text-gray-500">{livro.autor}</p>
-                <p className={`${styles.disponibilidade} ${livro.disponivel ? styles.disponivel : styles.indisponivel}`}>
+                <p
+                  className={`${styles.disponibilidade} ${
+                    livro.disponivel ? styles.disponivel : styles.indisponivel
+                  }`}
+                >
                   {livro.disponivel ? "Disponível" : "Indisponível"}
                 </p>
               </div>
@@ -177,14 +181,27 @@ export default function LivrosPage() {
                 {verMais ? "Ocultar detalhes" : "Ver mais detalhes"}
                 {verMais ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
               </button>
+
               {verMais && (
                 <div className="space-y-1 text-sm text-gray-700 mt-2">
-                  <p><strong>Gênero:</strong> {livroSelecionado.genero}</p>
-                  <p><strong>Editora:</strong> {livroSelecionado.editora}</p>
-                  <p><strong>Ano:</strong> {livroSelecionado.ano}</p>
-                  <p><strong>Doador:</strong> {livroSelecionado.doador || "Não informado"}</p>
-                  <p><strong>Observações:</strong> {livroSelecionado.observacoes || "Nenhuma"}</p>
-                  <p><strong>Sinopse:</strong> {livroSelecionado.sinopse || "Sem sinopse"}</p>
+                  <p>
+                    <strong>Gênero:</strong> {livroSelecionado.genero}
+                  </p>
+                  <p>
+                    <strong>Editora:</strong> {livroSelecionado.editora}
+                  </p>
+                  <p>
+                    <strong>Ano:</strong> {livroSelecionado.ano}
+                  </p>
+                  <p>
+                    <strong>Doador:</strong> {livroSelecionado.doador || "Não informado"}
+                  </p>
+                  <p>
+                    <strong>Observações:</strong> {livroSelecionado.observacoes || "Nenhuma"}
+                  </p>
+                  <p>
+                    <strong>Sinopse:</strong> {livroSelecionado.sinopse || "Sem sinopse"}
+                  </p>
                 </div>
               )}
             </div>
@@ -196,7 +213,6 @@ export default function LivrosPage() {
                   Solicitar Doação
                 </button>
               )}
-
               <button
                 className="w-full bg-gray-200 text-gray-800 py-2 rounded-md hover:bg-gray-300 transition"
                 onClick={() => setLivroSelecionado(null)}

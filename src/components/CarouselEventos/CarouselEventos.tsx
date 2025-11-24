@@ -27,7 +27,7 @@ export default function CarouselEventos({ eventos = [] }: CarouselEventosProps) 
 
 return (
   <div>
-    <div className="text-center sm:text-left">
+    <div className="text-center">
       <Typography
         variant="h3"
         className="font-bold text-gray-700 tracking-tight"

@@ -89,18 +89,25 @@ export default function Cadastro() {
               <Form className={styles.form}>
                 {/* BOTÕES SOCIAIS */}
                 <div className={styles.socialBtns}>
-                  <Button variant="outlined" className={styles.googleBtn}>
+                  <Button
+                    variant="outlined"
+                    className="flex items-center justify-center gap-2"
+                  >
                     <FcGoogle size={22} /> Entrar com Google
                   </Button>
 
-                <Button variant="outlined" className="flex items-center justify-center gap-2 text-blue-600">
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg"
-                    alt="Facebook"
-                    className="w-5 h-5"
-                  />
-                  Entrar com Facebook
-                </Button>
+              <Button
+                variant="outlined"
+                className="flex items-center justify-center gap-2 text-blue-600"
+                
+              >
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg"
+                  alt="Facebook"
+                  className="w-5 h-5"
+                />
+                Entrar com Facebook
+              </Button>
 
                 </div>
 
@@ -230,9 +237,15 @@ export default function Cadastro() {
                   <div className=" text-center">
                     <p className="text-gray-600">
                       Já possui uma conta?{" "}
-                    <Link href="/" className={styles.loginLink}>
+                    <Link href="/login" className={styles.loginLink}>
                       Faça login
                     </Link>
+                    </p>
+
+                    <p className="mt-3 text-center text-sm">
+                      <Link href="/" className="text-blue-600 hover:underline">
+                          Voltar para home
+                      </Link>
                     </p>
                   </div>            
               </Form>

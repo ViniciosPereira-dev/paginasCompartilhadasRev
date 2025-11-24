@@ -1,5 +1,6 @@
 export const livrosMock = [
   {
+    id: 1,
     titulo: "O Senhor dos Anéis",
     autor: "J.R.R. Tolkien",
     genero: "Fantasia",
@@ -12,6 +13,7 @@ export const livrosMock = [
     doador: "João Silva",
   },
   {
+    id: 2,
     titulo: "As Crônicas de Gelo e Fogo",
     autor: "George R. R. Martin",
     genero: "Fantasia",
@@ -24,6 +26,7 @@ export const livrosMock = [
     doador: "Maria Oliveira",
   },
   {
+    id: 3,
     titulo: "Dom Casmurro",
     autor: "Machado de Assis",
     genero: "Romance",
@@ -36,6 +39,7 @@ export const livrosMock = [
     doador: "Carlos Pereira",
   },
   {
+    id: 4,
     titulo: "O Pequeno Príncipe",
     autor: "Antoine de Saint-Exupéry",
     genero: "Infantil",
@@ -48,6 +52,7 @@ export const livrosMock = [
     doador: "Fernanda Souza",
   },
   {
+    id: 5,
     titulo: "1984",
     autor: "George Orwell",
     genero: "Distopia",
@@ -60,6 +65,7 @@ export const livrosMock = [
     doador: "Lucas Lima",
   },
   {
+    id: 6,
     titulo: "O Hobbit",
     autor: "J.R.R. Tolkien",
     genero: "Fantasia",
@@ -72,6 +78,7 @@ export const livrosMock = [
     doador: "Juliana Martins",
   },
   {
+    id: 7,
     titulo: "Harry Potter e a Pedra Filosofal",
     autor: "J.K. Rowling",
     genero: "Fantasia",
@@ -84,6 +91,7 @@ export const livrosMock = [
     doador: "Bruno Almeida",
   },
   {
+    id: 8,
     titulo: "O Código Da Vinci",
     autor: "Dan Brown",
     genero: "Suspense",
@@ -96,6 +104,7 @@ export const livrosMock = [
     doador: "Mariana Costa",
   },
   {
+    id: 9,
     titulo: "O Alquimista",
     autor: "Paulo Coelho",
     genero: "Ficção",
@@ -108,6 +117,7 @@ export const livrosMock = [
     doador: "Ana Paula",
   },
   {
+    id: 10,
     titulo: "A Revolução dos Bichos",
     autor: "George Orwell",
     genero: "Política",
@@ -120,6 +130,7 @@ export const livrosMock = [
     doador: "Felipe Rocha",
   },
   {
+    id: 11,
     titulo: "Moby Dick",
     autor: "Herman Melville",
     genero: "Aventura",
@@ -132,6 +143,7 @@ export const livrosMock = [
     doador: "Patrícia Mendes",
   },
   {
+    id: 12,
     titulo: "O Morro dos Ventos Uivantes",
     autor: "Emily Brontë",
     genero: "Romance",
@@ -144,6 +156,7 @@ export const livrosMock = [
     doador: "Renato Silva",
   },
   {
+    id: 13,
     titulo: "O Apanhador no Campo de Centeio",
     autor: "J.D. Salinger",
     genero: "Ficção",
@@ -156,6 +169,7 @@ export const livrosMock = [
     doador: "Gabriela Freitas",
   },
   {
+    id: 14,
     titulo: "Cem Anos de Solidão",
     autor: "Gabriel García Márquez",
     genero: "Realismo Mágico",
@@ -168,6 +182,7 @@ export const livrosMock = [
     doador: "Rodrigo Santos",
   },
   {
+    id: 15,
     titulo: "O Conde de Monte Cristo",
     autor: "Alexandre Dumas",
     genero: "Aventura",
@@ -180,6 +195,7 @@ export const livrosMock = [
     doador: "Tatiane Lima",
   },
   {
+    id: 16,
     titulo: "Alice no País das Maravilhas",
     autor: "Lewis Carroll",
     genero: "Infantil",
@@ -192,6 +208,7 @@ export const livrosMock = [
     doador: "Lucas Martins",
   },
   {
+    id: 17,
     titulo: "O Pequeno Nicolau",
     autor: "René Goscinny",
     genero: "Infantil",
@@ -204,6 +221,7 @@ export const livrosMock = [
     doador: "Camila Rocha",
   },
   {
+    id: 18,
     titulo: "O Diário de Anne Frank",
     autor: "Anne Frank",
     genero: "Biografia",
@@ -216,6 +234,7 @@ export const livrosMock = [
     doador: "Paulo Henrique",
   },
   {
+    id: 19,
     titulo: "A Menina que Roubava Livros",
     autor: "Markus Zusak",
     genero: "Ficção",
@@ -228,6 +247,7 @@ export const livrosMock = [
     doador: "Juliana Ferreira",
   },
   {
+    id: 20,
     titulo: "O Guia do Mochileiro das Galáxias",
     autor: "Douglas Adams",
     genero: "Ficção Científica",

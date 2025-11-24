@@ -8,7 +8,7 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
 
   // rotas que NÃO devem ter header
-  const hideHeader = pathname === "/cadastro";
+ const hideHeader = ["/cadastro", "/login"].includes(pathname);
 
   return (
     <html lang="pt-br">

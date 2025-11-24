@@ -8,6 +8,7 @@ import { Button, Typography } from "@material-tailwind/react";
 import { Instagram, Linkedin, Facebook } from "lucide-react";
 import Faq from "../components/Faq/Faq";
 import Footer from "../components/Footer/Footer";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -26,7 +27,9 @@ export default function Home() {
 
         <div className={styles.btnContainer}>
           <button className={styles.btnDoar}>Doar</button>
-          <button className={styles.btnExplorar}>Explorar Livros</button>
+            <Link href="/livros" className={styles.btnExplorar}>
+            Explorar Livros
+            </Link>
         </div>
       </div>
 

@@ -15,7 +15,7 @@ import {
   Checkbox,
 } from "@material-tailwind/react";
 import { Formik, Form, ErrorMessage } from "formik";
-import { loginSchema } from "@/src/schemas/LoginSchema";
+import { ModalSchema } from "../../schemas/ModalSchema";
 
 export function LoginModal() {
   const [open, setOpen] = React.useState(false);
@@ -60,7 +60,7 @@ export function LoginModal() {
           <Card className="rounded-t-none shadow-none p-0">
             <Formik
               initialValues={initialValues}
-              validationSchema={loginSchema}
+              validationSchema={ModalSchema}
               onSubmit={handleSubmit}
             >
               {({ handleChange, handleBlur, values }) => (
