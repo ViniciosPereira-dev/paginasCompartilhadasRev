@@ -22,7 +22,8 @@ export default function LivrosPage() {
     try {
       const res = await fetch(`/api/livros?busca=${buscaValor}&genero=${genero}`);
       const data = await res.json();
-      setLivros(data);
+      // Filtra somente livros disponíveis
+      setLivros(data.filter(l => l.disponivel));
     } catch {
       setLivros([]);
     } finally {
@@ -67,7 +68,7 @@ export default function LivrosPage() {
   return (
     <div className={styles.container}>
       <Typography variant="h3" className={styles.titulo}>
-        Conheça nossos livros cadastrados
+        Conheça nossos livros Disponiveis
       </Typography>
 
       {/* Busca e filtro */}
@@ -130,13 +131,7 @@ export default function LivrosPage() {
               <div className={styles.infoLivro}>
                 <h3 className="font-semibold text-gray-800">{livro.titulo}</h3>
                 <p className="text-sm text-gray-500">{livro.autor}</p>
-                <p
-                  className={`${styles.disponibilidade} ${
-                    livro.disponivel ? styles.disponivel : styles.indisponivel
-                  }`}
-                >
-                  {livro.disponivel ? "Disponível" : "Indisponível"}
-                </p>
+                <p className={styles.disponivel}>Disponível</p>
               </div>
             </div>
           ))}
@@ -166,9 +161,7 @@ export default function LivrosPage() {
               <div>
                 <h2 className="text-xl md:text-2xl font-semibold text-gray-800">{livroSelecionado.titulo}</h2>
                 <p className="text-sm text-gray-500">{livroSelecionado.autor}</p>
-                <p className={`${livroSelecionado.disponivel ? styles.disponivel : styles.indisponivel}`}>
-                  {livroSelecionado.disponivel ? "Disponível" : "Indisponível"}
-                </p>
+                <p className={styles.disponivel}>Disponível</p>
               </div>
             </div>
 
@@ -208,11 +201,9 @@ export default function LivrosPage() {
 
             {/* Ações */}
             <div className={styles.modalActions}>
-              {livroSelecionado.disponivel && (
-                <button className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition">
-                  Solicitar Doação
-                </button>
-              )}
+              <button className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition">
+                Solicitar Doação
+              </button>
               <button
                 className="w-full bg-gray-200 text-gray-800 py-2 rounded-md hover:bg-gray-300 transition"
                 onClick={() => setLivroSelecionado(null)}

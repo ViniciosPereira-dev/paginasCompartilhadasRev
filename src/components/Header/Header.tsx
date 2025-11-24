@@ -78,7 +78,7 @@ export default function Header() {
 
           <MenuList>
             <MenuItem>
-              <a href="#" className="flex items-center gap-2">
+              <a href="/doar" className="flex items-center gap-2">
                 <ArrowUpTrayIcon className="w-5 h-5" />
                 Doar livro
               </a>
