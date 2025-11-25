@@ -27,22 +27,19 @@ export default function Cadastro() {
   const handleSubmit = async (values, { resetForm }) => {
     console.log("ENVIADO:", values);
 
-    // Simula envio
     await new Promise((r) => setTimeout(r, 600));
 
-    // Mostra o toast
+
     setShowToast(true);
 
-    // Limpa o form
     resetForm();
 
-    // Esconde o toast após 2,5s
     setTimeout(() => setShowToast(false), 2500);
   };
 
   return (
     <div className={styles.page}>
-      {/* LADO ESQUERDO - IMAGEM */}
+
 <div className={styles.left}>
   <Image
     src="/imagens/cadastro2.jpg"
@@ -58,7 +55,7 @@ export default function Cadastro() {
 </div>
 
 
-      {/* LADO DIREITO - FORM */}
+
       <div className={styles.right}>
         <div className={styles.card}>
           <h2 className={styles.title}>Criar conta</h2>
@@ -87,7 +84,7 @@ export default function Cadastro() {
           >
             {({ values, handleChange, handleBlur, isSubmitting }) => (
               <Form className={styles.form}>
-                {/* BOTÕES SOCIAIS */}
+
                 <div className={styles.socialBtns}>
                   <Button
                     variant="outlined"
@@ -118,8 +115,7 @@ export default function Cadastro() {
                   <div className={styles.line}></div>
                 </div>
 
-                {/* Campos do Formulário */}
-                {/* NOME + EMAIL */}
+
                 <div className={styles.grid2}>
                   <div className={styles.field}>
                     <Input
@@ -143,7 +139,7 @@ export default function Cadastro() {
                   </div>
                 </div>
 
-                {/* SENHAS */}
+
                 <div className={styles.grid2}>
                   <div className={styles.field}>
                     <Input
@@ -169,7 +165,7 @@ export default function Cadastro() {
                   </div>
                 </div>
 
-                {/* TIPO USUÁRIO + CPF/CNPJ */}
+
                 <div className={styles.grid2}>
                   <div className={styles.field}>
                     <Select
@@ -205,7 +201,7 @@ export default function Cadastro() {
                   </div>
                 </div>
 
-                {/* DATA + ENDEREÇO */}
+
                 <div className={styles.grid2}>
                   <div className={styles.field}>
                     <Input

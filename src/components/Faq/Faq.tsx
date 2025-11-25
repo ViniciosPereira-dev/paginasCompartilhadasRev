@@ -44,7 +44,7 @@ export default function Faq() {
           Perguntas Frequentes
         </Typography>
 
-        {/* Lista de perguntas */}
+
         <div className={styles.grid}>
           {faqs.map((faq, index) => (
             <div key={index} className={styles.card}>
@@ -66,7 +66,7 @@ export default function Faq() {
                 />
               </button>
 
-              {/* Resposta */}
+
               <motion.div
                 initial={false}
                 animate={{

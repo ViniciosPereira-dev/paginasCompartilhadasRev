@@ -1,6 +1,19 @@
-.card{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 4rem;
+.card {
+  display: grid;
+  grid-template-columns: 1fr; /* padrão: 1 coluna no mobile */
+  gap: 2rem;
+}
+
+/* a partir de tablets (>=768px) */
+@media (min-width: 768px) {
+  .card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* a partir de desktops (>=1024px) */
+@media (min-width: 1024px) {
+  .card {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

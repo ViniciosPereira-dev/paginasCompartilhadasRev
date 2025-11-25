@@ -26,7 +26,12 @@ export default function Home() {
         </p>
 
         <div className={styles.btnContainer}>
-          <button className={styles.btnDoar}>Doar</button>
+          <Link className={styles.btnDoar}
+          href="/doar"
+          
+          >
+          Doar
+          </Link>
             <Link href="/livros" className={styles.btnExplorar}>
             Explorar Livros
             </Link>
@@ -56,8 +61,7 @@ export default function Home() {
           />
         </div>
 
-        {/* Texto */}
-        <div className={styles.textoWrapper}>
+      <div className={styles.textoWrapper}>
           <Typography variant="h4" className={styles.titulo}>
             Sobre Nós
           </Typography>

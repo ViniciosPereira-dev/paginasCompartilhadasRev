@@ -39,7 +39,7 @@ export default function loginPage() {
           {({ isSubmitting }) => (
             <Form>
 
-              {/* EMAIL */}
+
               <Field name="identifier">
                 {({ field, meta }) => (
                   <div className="mb-4">
@@ -56,7 +56,6 @@ export default function loginPage() {
                 )}
               </Field>
 
-              {/* SENHA */}
               <div className="flex justify-between mb-1">
                 <label className="text-sm font-medium text-gray-700">
                   Senha
@@ -86,7 +85,7 @@ export default function loginPage() {
                 )}
               </Field>
 
-              {/* BOTÃO ENTRAR */}
+
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -99,7 +98,6 @@ export default function loginPage() {
                 {isSubmitting ? "Carregando..." : "Entrar"}
               </button>
 
-              {/* separador */}
               <div className="flex items-center my-6">
                 <div className="flex-1 h-px bg-gray-200" />
                 <div className="px-3 text-sm text-gray-400">ou</div>

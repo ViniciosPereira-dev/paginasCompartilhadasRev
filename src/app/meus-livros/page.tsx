@@ -1,240 +1,216 @@
 "use client";
-
-import { useState, useEffect, useCallback } from "react";
-import { Typography, Button, Input, Textarea, Card, CardBody } from "@material-tailwind/react";
-import { Loader2, X, Plus } from "lucide-react";
-
-interface Livro {
-  id: number;
-  titulo: string;
-  autor: string;
-  editora?: string;
-  genero?: string;
-  ano?: number;
-  sinopse?: string;
-  observacoes?: string;
-  imagem?: string;
-}
+import { useEffect, useState } from "react";
+import { Typography, Button, Input, Textarea, Card } from "@material-tailwind/react";
+import { motion } from "framer-motion";
+import { CheckCircleIcon, ExclamationCircleIcon } from "@heroicons/react/24/solid";
 
 export default function MeusLivrosPage() {
-  const [livros, setLivros] = useState<Livro[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [excluindoId, setExcluindoId] = useState<number | null>(null);
-  const [novoLivro, setNovoLivro] = useState<Livro | null>(null);
-  const [livroSelecionado, setLivroSelecionado] = useState<Livro | null>(null);
-  const [salvando, setSalvando] = useState(false);
+  const [livros, setLivros] = useState<any[]>([]);
+  const [livroSelecionado, setLivroSelecionado] = useState<any>(null);
+  const [formValues, setFormValues] = useState({ titulo: "", autor: "", observacoes: "", imagem: null });
+  const [alert, setAlert] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
-  // ----------- Buscar livros cadastrados -----------
-  const buscarLivros = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/doar");
-      if (!res.ok) throw new Error("Falha ao buscar livros");
-      const data: Livro[] = await res.json();
-      setLivros(data);
-    } catch (err) {
-      console.error(err);
-      setLivros([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const carregar = async () => {
+    const res = await fetch("/api/livrosDoacao");
+    const data = await res.json();
+    setLivros(data);
+  };
 
   useEffect(() => {
-    buscarLivros();
-  }, [buscarLivros]);
+    carregar();
+  }, []);
 
-  // ----------- Excluir livro -----------
-  const handleDelete = async (id: number) => {
-    if (!confirm("Deseja realmente excluir este livro?")) return;
-
-    setExcluindoId(id);
+  const remover = async (id: number) => {
     try {
-      const res = await fetch(`/api/doar/${id}`, { method: "DELETE" });
-      if (!res.ok) throw new Error("Falha ao excluir livro");
-      setLivros(prev => prev.filter(l => l.id !== id));
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setExcluindoId(null);
+      await fetch("/api/livrosDoacao", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+      setAlert({ type: "success", message: "Livro removido com sucesso!" });
+      carregar();
+    } catch {
+      setAlert({ type: "error", message: "Falha ao remover livro" });
     }
+    setTimeout(() => setAlert(null), 3000);
   };
 
-  // ----------- Salvar edição -----------
-  const handleSave = async () => {
+  const abrirModal = (livro: any) => {
+    setLivroSelecionado(livro);
+    setFormValues({
+      titulo: livro.titulo,
+      autor: livro.autor,
+      observacoes: livro.observacoes || "",
+      imagem: null, 
+    });
+  };
+
+  const fecharModal = () => setLivroSelecionado(null);
+
+  const salvarEdicao = async () => {
     if (!livroSelecionado) return;
-    setSalvando(true);
+
+    const formData = new FormData();
+    formData.append("id", livroSelecionado.id);
+    formData.append("titulo", formValues.titulo);
+    formData.append("autor", formValues.autor);
+    formData.append("observacoes", formValues.observacoes);
+    if (formValues.imagem) formData.append("imagem", formValues.imagem);
 
     try {
-      const res = await fetch(`/api/doar/${livroSelecionado.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(livroSelecionado),
-      });
-      if (!res.ok) throw new Error("Falha ao salvar livro");
-
-      const data: Livro = await res.json();
-      setLivros(prev => prev.map(l => (l.id === data.id ? data : l)));
-      setLivroSelecionado(null);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setSalvando(false);
+      await fetch("/api/livrosDoacao", { method: "PUT", body: formData });
+      setAlert({ type: "success", message: "Livro atualizado com sucesso!" });
+      fecharModal();
+      carregar();
+    } catch {
+      setAlert({ type: "error", message: "Falha ao atualizar livro" });
     }
+
+    setTimeout(() => setAlert(null), 3000);
   };
 
-  // ----------- Salvar novo livro -----------
-  const handleSaveNovoLivro = async () => {
-    if (!novoLivro) return;
-    setSalvando(true);
-
-    try {
-      const res = await fetch("/api/doar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(novoLivro),
-      });
-      if (!res.ok) throw new Error("Falha ao cadastrar livro");
-
-      const data: Livro = await res.json();
-      setLivros(prev => [...prev, data]);
-      setNovoLivro(null);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setSalvando(false);
-    }
-  };
-
-  // ----------- Layout -----------
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-48">
-        <Loader2 className="w-8 h-8 animate-spin text-gray-500" />
-        <Typography className="ml-2 text-gray-500">Carregando seus livros...</Typography>
-      </div>
-    );
-  }
-
-if (!livros.length) {
   return (
-    <div className="text-center mt-8">
-      <Typography className="text-gray-500 mb-4">
-        Você ainda não possui livros cadastrados.
-      </Typography>
-      <a
-        href="/doar"
-        className="text-blue-600 hover:underline font-medium"
-      >
-        Clique aqui para cadastrar um livro
-      </a>
-    </div>
-  );
-}
+    <div className="p-6 max-w-6xl mx-auto relative">
 
 
-  return (
-    <div className="p-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {livros.map(livro => (
-          <Card key={livro.id} className="shadow-sm">
-            <CardBody>
+      {alert && (
+        <div className={`fixed top-6 left-1/2 -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg text-white z-50
+          ${alert.type === "success" ? "bg-green-600" : "bg-red-600"}`}>
+          {alert.type === "success" ? (
+            <CheckCircleIcon className="w-5 h-5 inline mr-2" />
+          ) : (
+            <ExclamationCircleIcon className="w-5 h-5 inline mr-2" />
+          )}
+          <span className="font-medium">{alert.message}</span>
+        </div>
+      )}
+
+
+
+      {livros.length === 0 ? (
+        <div className="text-center py-20">
+          <Typography variant="h5" className="mb-4 text-gray-600">
+            Você ainda não cadastrou nenhum livro para doação
+          </Typography>
+          <Button
+            color="blue"
+            onClick={() => window.location.href = "/doar"} 
+          >
+            Cadastrar meu primeiro livro
+          </Button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {livros.map((livro) => (
+            <Card key={livro.id} className="cursor-pointer hover:shadow-lg" onClick={() => abrirModal(livro)}>
               <img
-                src={livro.imagem || "/placeholder.png"}
+                src={livro.imagem ? `/uploads/${livro.imagem}` : "/placeholder.png"} // imagem cadastrada
                 alt={livro.titulo}
-                className="w-full h-48 object-cover rounded mb-4"
+                className="w-full h-48 object-cover rounded-t"
               />
-              <h3 className="font-semibold text-gray-800">{livro.titulo}</h3>
-              <p className="text-sm text-gray-500">{livro.autor}</p>
-
-              <div className="flex gap-2 mt-4">
-                <Button size="sm" color="blue" onClick={() => setLivroSelecionado(livro)}>
-                  Editar
-                </Button>
-                <Button
-                  size="sm"
-                  color="red"
-                  onClick={() => handleDelete(livro.id)}
-                  disabled={excluindoId === livro.id}
-                >
-                  {excluindoId === livro.id ? <Loader2 className="w-4 h-4 animate-spin" /> : "Excluir"}
-                </Button>
+              <div className="p-4">
+                <Typography className="font-bold">{livro.titulo}</Typography>
+                <Typography className="text-sm text-gray-500">{livro.autor}</Typography>
+                <div className="flex gap-2 mt-2">
+                  <Button size="sm" color="blue" onClick={(e) => { e.stopPropagation(); abrirModal(livro); }}>Editar</Button>
+                  <Button size="sm" color="red" onClick={(e) => { e.stopPropagation(); remover(livro.id); }}>Excluir</Button>
+                </div>
               </div>
-            </CardBody>
-          </Card>
-        ))}
-      </div>
-
-      {/* Modal edição */}
-      {livroSelecionado && (
-        <ModalLivro
-          titulo="Editar Livro"
-          livro={livroSelecionado}
-          setLivro={setLivroSelecionado}
-          onSave={handleSave}
-          salvando={salvando}
-        />
+            </Card>
+          ))}
+        </div>
       )}
 
-      {/* Modal cadastro */}
-      {novoLivro && (
-        <ModalLivro
-          titulo="Adicionar Livro"
-          livro={novoLivro}
-          setLivro={setNovoLivro}
-          onSave={handleSaveNovoLivro}
-          salvando={salvando}
-        />
-      )}
-    </div>
-  );
-}
 
-// Componente de Modal Reutilizável
-interface ModalProps {
-  titulo: string;
-  livro: Livro;
-  setLivro: (livro: Livro | null) => void;
-  onSave: () => void;
-  salvando: boolean;
-}
-
-function ModalLivro({ titulo, livro, setLivro, onSave, salvando }: ModalProps) {
-  return (
-    <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-      onClick={() => !salvando && setLivro(null)}
+{livroSelecionado && (
+  <motion.div
+    className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 pt-20"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    onClick={fecharModal}
+  >
+    <motion.div
+      className="bg-white rounded-lg w-full max-w-5xl p-6 relative shadow-lg"
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 100, opacity: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+      onClick={(e) => e.stopPropagation()}
     >
-      <div
-        className="bg-white p-6 rounded-lg w-full max-w-md max-h-full overflow-y-auto"
-        onClick={e => e.stopPropagation()}
-      >
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">{titulo}</h2>
-          <Button size="sm" variant="text" color="gray" onClick={() => setLivro(null)} className="p-2">
-            <X className="w-5 h-5" />
-          </Button>
+      <Typography variant="h4" className="font-bold mb-6">{livroSelecionado.titulo}</Typography>
+      <Typography className="text-gray-500 mb-6">{livroSelecionado.autor}</Typography>
+
+      <div className="grid grid-cols-2 gap-6">
+        <div className="flex flex-col gap-4">
+          <Input
+            label="Título"
+            value={formValues.titulo}
+            onChange={(e) => setFormValues({ ...formValues, titulo: e.target.value })}
+          />
+          <Input
+            label="Autor"
+            value={formValues.autor}
+            onChange={(e) => setFormValues({ ...formValues, autor: e.target.value })}
+          />
+          <Input
+            label="Gênero"
+            value={formValues.genero || livroSelecionado.genero || ""}
+            onChange={(e) => setFormValues({ ...formValues, genero: e.target.value })}
+          />
+          <Input
+            label="Editora"
+            value={formValues.editora || livroSelecionado.editora || ""}
+            onChange={(e) => setFormValues({ ...formValues, editora: e.target.value })}
+          />
         </div>
 
-        <div className="space-y-3">
-          <Input label="Título" value={livro.titulo} onChange={e => setLivro({ ...livro, titulo: e.target.value })} />
-          <Input label="Autor" value={livro.autor} onChange={e => setLivro({ ...livro, autor: e.target.value })} />
-          <Input label="Editora" value={livro.editora || ""} onChange={e => setLivro({ ...livro, editora: e.target.value })} />
-          <Input label="Gênero" value={livro.genero || ""} onChange={e => setLivro({ ...livro, genero: e.target.value })} />
-          <Input label="Ano" type="number" value={livro.ano || ""} onChange={e => setLivro({ ...livro, ano: Number(e.target.value) || undefined })} />
-          <Textarea label="Sinopse" value={livro.sinopse || ""} onChange={e => setLivro({ ...livro, sinopse: e.target.value })} />
-          <Textarea label="Observações" value={livro.observacoes || ""} onChange={e => setLivro({ ...livro, observacoes: e.target.value })} />
-        </div>
-
-        <div className="flex justify-end gap-2 mt-4">
-          <Button size="sm" color="blue" onClick={onSave} disabled={salvando}>
-            {salvando ? <Loader2 className="w-4 h-4 animate-spin" /> : "Salvar"}
-          </Button>
-          <Button size="sm" variant="outlined" color="gray" onClick={() => setLivro(null)} disabled={salvando}>
-            Cancelar
-          </Button>
+        <div className="flex flex-col gap-4">
+          <Input
+            label="Ano"
+            type="number"
+            value={formValues.ano || livroSelecionado.ano || ""}
+            onChange={(e) => setFormValues({ ...formValues, ano: e.target.value })}
+          />
+          <Textarea
+            label="Sinopse"
+            value={formValues.sinopse || livroSelecionado.sinopse || ""}
+            onChange={(e) => setFormValues({ ...formValues, sinopse: e.target.value })}
+          />
+          <Textarea
+            label="Observações"
+            value={formValues.observacoes}
+            onChange={(e) => setFormValues({ ...formValues, observacoes: e.target.value })}
+          />
+          <Input
+            type="file"
+            label="Alterar Imagem"
+            onChange={(e) => setFormValues({ ...formValues, imagem: e.target.files?.[0] || null })}
+          />
+          {formValues.imagem ? (
+            <img
+              src={URL.createObjectURL(formValues.imagem)}
+              alt="Preview"
+              className="w-full h-48 object-cover rounded"
+            />
+          ) : livroSelecionado.imagem ? (
+            <img
+              src={`/uploads/${livroSelecionado.imagem}`}
+              alt={livroSelecionado.titulo}
+              className="w-full h-48 object-cover rounded"
+            />
+          ) : null}
         </div>
       </div>
+
+      <div className="mt-6 flex justify-end gap-2">
+        <Button color="blue" onClick={salvarEdicao}>Salvar</Button>
+        <Button color="gray" onClick={fecharModal}>Fechar</Button>
+      </div>
+    </motion.div>
+  </motion.div>
+)}
+
     </div>
   );
 }

@@ -23,15 +23,13 @@ interface CardProps {
 export default function CardInstituicao({ inst }: CardProps) {
   return (
     <div className={styles.card}>
-      {/* Imagem */}
+
       <div className={styles.imageWrapper}>
         <img src={inst.imagem} alt={inst.nome} className={styles.image} />
       </div>
 
-      {/* Conteúdo */}
-      <div className={styles.content}>
-        {/* Nome */}
-        <Typography variant="h5" className={styles.title}>
+     <div className={styles.content}>
+       <Typography variant="h5" className={styles.title}>
           {inst.nome}
         </Typography>
 
@@ -43,12 +41,12 @@ export default function CardInstituicao({ inst }: CardProps) {
           </Typography>
         </div>
 
-        {/* Descrição */}
+
         <Typography variant="paragraph" className={styles.description}>
           {inst.descricao}
         </Typography>
 
-        {/* Botão */}
+
         <button className={styles.button}>Ver Perfil</button>
       </div>
     </div>

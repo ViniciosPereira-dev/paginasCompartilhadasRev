@@ -20,7 +20,6 @@ export async function GET(req: Request) {
 
   let resultado = livros;
 
-  // ------------ BUSCA POR TODOS OS CAMPOS --------------
   if (busca) {
     resultado = resultado.filter((l) => {
       const titulo = normalizar(l.titulo);

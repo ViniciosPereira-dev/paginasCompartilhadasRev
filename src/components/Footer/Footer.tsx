@@ -24,7 +24,7 @@ export default function Footer() {
           />
         </div>
 
-        {/* Links do site */}
+
         <ul className={styles.links}>
           {links.map((link, index) => (
             <li key={index}>
@@ -40,7 +40,7 @@ export default function Footer() {
         </ul>
       </div>
 
-      {/* Linha divisória e direitos */}
+
       <hr className={styles.divider} />
       <Typography className={styles.copy}>
         &copy; {new Date().getFullYear()} Páginas Compartilhadas

@@ -22,7 +22,7 @@ export default function LivrosPage() {
     try {
       const res = await fetch(`/api/livros?busca=${buscaValor}&genero=${genero}`);
       const data = await res.json();
-      // Filtra somente livros disponíveis
+
       setLivros(data.filter(l => l.disponivel));
     } catch {
       setLivros([]);
@@ -71,7 +71,7 @@ export default function LivrosPage() {
         Conheça nossos livros Disponiveis
       </Typography>
 
-      {/* Busca e filtro */}
+
       <div className={styles.buscaFiltro}>
         <select
           value={filtroGenero}
@@ -111,7 +111,7 @@ export default function LivrosPage() {
         </div>
       </div>
 
-      {/* Lista de livros */}
+
       {loading ? (
         <Typography className="text-center text-gray-500 mt-4">
           Carregando livros...
@@ -138,7 +138,7 @@ export default function LivrosPage() {
         </div>
       )}
 
-      {/* Modal */}
+
       {livroSelecionado && (
         <motion.div
           className={styles.modalOverlay}
@@ -155,7 +155,7 @@ export default function LivrosPage() {
             transition={{ type: "spring", stiffness: 250, damping: 25 }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
+
             <div className={styles.modalHeader}>
               <img src={livroSelecionado.imagem || "/placeholder.png"} alt={livroSelecionado.titulo} />
               <div>
@@ -165,7 +165,6 @@ export default function LivrosPage() {
               </div>
             </div>
 
-            {/* Ver mais */}
             <div className={styles.modalBody}>
               <button
                 className="flex items-center gap-1 text-gray-600 hover:text-gray-800"
@@ -199,7 +198,7 @@ export default function LivrosPage() {
               )}
             </div>
 
-            {/* Ações */}
+
             <div className={styles.modalActions}>
               <button className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition">
                 Solicitar Doação

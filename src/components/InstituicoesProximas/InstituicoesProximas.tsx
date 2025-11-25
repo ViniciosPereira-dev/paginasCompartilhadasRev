@@ -92,7 +92,7 @@ export default function InstituicoesProximas() {
           )}
         </div>
 
-        {/* Botão com tamanho fixo */}
+
         <Button
           type="button"
           onClick={buscarInstituicoes}
@@ -102,7 +102,7 @@ export default function InstituicoesProximas() {
           {loading ? "Buscando..." : "Buscar"}
         </Button>
 
-        {/* Mensagem de Erro */}
+
         {erro && (
           <Alert
             color="red"
@@ -113,7 +113,7 @@ export default function InstituicoesProximas() {
         )}
       </div>
 
-      {/* Loader e resultados */}
+
       {(loading || buscou) && (
         <div className="flex flex-col items-center mt-4 w-full max-w-4xl">
           {loading && (
@@ -132,7 +132,7 @@ export default function InstituicoesProximas() {
             </Alert>
           )}
 
-          {/* GRID DE CARDS */}
+
           {!loading && resultados.length > 0 && (
             <div className={styles.card}>
               {resultados.map((inst) => (

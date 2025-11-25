@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { instituicoesMock } from "@/src/data/instituicoes";
 
-// GET: retorna todas as instituições ou filtra por cidade/estado via query
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const cidade = searchParams.get("cidade");

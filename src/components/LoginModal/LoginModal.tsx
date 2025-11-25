@@ -50,7 +50,7 @@ export function LoginModal() {
         className="bg-transparent shadow-none"
       >
         <div className="mx-auto w-full max-w-[24rem] rounded-lg overflow-hidden shadow-lg bg-gray-900 text-white">
-          {/* Título */}
+
           <div className="flex justify-center items-center py-4">
             <Typography variant="h4" className="text-white font-semibold">
               Entrar
@@ -66,8 +66,7 @@ export function LoginModal() {
               {({ handleChange, handleBlur, values }) => (
                 <Form>
                   <CardBody className="flex flex-col gap-4 p-6">
-                    {/* E-mail */}
-                    <Typography className="-mb-2" variant="h6">
+                 <Typography className="-mb-2" variant="h6">
                       Seu E-mail
                     </Typography>
                     <Input
@@ -84,7 +83,7 @@ export function LoginModal() {
                       className="text-red-500 text-sm"
                     />
 
-                    {/* Senha */}
+
                     <Typography className="-mb-2" variant="h6">
                       Sua Senha
                     </Typography>
@@ -103,7 +102,7 @@ export function LoginModal() {
                       className="text-red-500 text-sm"
                     />
 
-                    {/* Checkbox */}
+
                     <div className="-ml-2.5 -mt-3">
                       <Checkbox
                         name="manterConectado"
@@ -115,19 +114,19 @@ export function LoginModal() {
                   </CardBody>
 
                   <CardFooter className="pt-4 px-6 pb-6 flex flex-col gap-4">
-                    {/* Botão Entrar */}
+
                     <Button type="submit" fullWidth>
                       Entrar
                     </Button>
 
-                    {/* Separador com CSS */}
-                    <div className={styles.separator}>
-                      <div className={styles['separator-line']}></div>
-                      <span className={styles['separator-text']}>ou</span>
-                      <div className={styles['separator-line']}></div>
-                    </div>
 
-                    {/* Login Social */}
+                  <div className="flex items-center my-6">
+                    <div className="flex-1 h-px bg-gray-200" />
+                    <div className="px-3 text-sm text-gray-400">ou</div>
+                    <div className="flex-1 h-px bg-gray-200" />
+                  </div>
+
+      
                     <div className="flex flex-col gap-2">
                       {/* Google */}
                       <Button
