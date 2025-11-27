@@ -111,8 +111,9 @@ Modelagem SQL em MySQL
 
 Script disponível no repositório
 
-📁 Banco de Dados:
-Banco_Dados_PI.sql
+📁 **Modelo e script SQL:**  
+[Banco_Dados_PI.sql](https://github.com/ViniciosPereira-dev/paginasCompartilhadasRev/blob/main/Banco_Dados_PI.sql)
 
-📦 Código-fonte (ZIP):
-paginasCompartilhadasRev.zip
+📦 **Código-fonte da aplicação (ZIP):**  
+[paginasCompartilhadasRev.zip](https://github.com/ViniciosPereira-dev/paginasCompartilhadasRev/blob/main/paginasCompartilhadasRev.zip)
+
