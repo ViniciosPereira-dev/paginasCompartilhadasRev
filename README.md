@@ -117,3 +117,6 @@ Script disponível no repositório
 📦 **Código-fonte da aplicação (ZIP):**  
 [paginasCompartilhadasRev.zip](https://github.com/ViniciosPereira-dev/paginasCompartilhadasRev/blob/main/paginasCompartilhadasRev.zip)
 
+[Assista ao vídeo de demonstração](https://drive.google.com/file/d/1-MOa0mXKwX9ePAC9o4Fw9duXv0ehDNZu/view?usp=vids_web)
+
+
